@@ -1,8 +1,10 @@
+import MainPage from "@/components/main-page/MainPage.tsx";
+
 const App = () => {
   return (
-    <>
-      <p className="text-blue-200">hola</p>
-    </>
+    <div className="w-full h-screen">
+      <MainPage />
+    </div>
   );
 };
 
