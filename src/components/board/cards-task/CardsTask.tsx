@@ -1,20 +1,30 @@
+import * as React from "react";
 import { Items } from "@/components/board/item-board/ItemBoard.tsx";
 
 interface Props {
   item: Items;
-  handleDragStart: (event: React.DragEvent<HTMLDivElement>, dataElement: Items) => void;
-  handleDragDropItem: (event: React.DragEvent<HTMLDivElement>, dataElement: Items) => void;
+  boardId: number;
+  handleDragStart: (
+    event: React.DragEvent<HTMLDivElement>,
+    dataElement: Items,
+    boardId: number
+  ) => void;
+  handleDragDropItem: (
+    event: React.DragEvent<HTMLDivElement>,
+    dataElement: Items,
+    boardId: number
+  ) => void;
 }
 
-const CardsTask = ({ item, handleDragStart, handleDragDropItem }: Props) => {
+const CardsTask = ({ item, boardId, handleDragStart, handleDragDropItem }: Props) => {
   return (
     <div
       id={item.id.toString()}
       draggable
       className="bg-slate-900 p-2 rounded-md border-2 border-slate-700 cursor-pointer"
-      onDragStart={(event) => handleDragStart(event, item)}
+      onDragStart={(event) => handleDragStart(event, item, boardId)}
       onDragOver={(event) => event.preventDefault()}
-      onDrop={(event) => handleDragDropItem(event, item)}
+      onDrop={(event) => handleDragDropItem(event, item, boardId)}
     >
       <div className="">
         <h2>{item.title}</h2>
