@@ -15,7 +15,7 @@ interface Props {
     itemsBoard: Items[];
   };
   handleDragOver: (event: React.DragEvent<HTMLDivElement>) => void;
-  handleDropToItemBoard: (event: React.DragEvent<HTMLDivElement>) => void;
+  handleDropToItemBoard: (event: React.DragEvent<HTMLDivElement>, boardId: number) => void;
   handleDragStart: (
     event: React.DragEvent<HTMLDivElement>,
     dataElement: Items,
@@ -50,7 +50,7 @@ const ItemBoard = ({
         id="container-drop"
         className="flex flex-col gap-2 h-full"
         onDragOver={handleDragOver}
-        onDrop={handleDropToItemBoard}
+        onDrop={(event) => handleDropToItemBoard(event, itemBoard.id)}
       >
         {itemBoard.itemsBoard.map((itemCards) => (
           <CardsTask

@@ -82,13 +82,40 @@ const Board = () => {
     event.preventDefault();
   };
 
-  const handleDropToItemBoard = (event: React.DragEvent<HTMLDivElement>) => {
+  const handleDropToItemBoard = (event: React.DragEvent<HTMLDivElement>, boardId: number) => {
     event.preventDefault();
 
-    /*    const dataElement = JSON.parse(event.dataTransfer.getData("dataElement"));
+    const dataElement = JSON.parse(event.dataTransfer.getData("dataElement"));
 
-    const newList = items.filter((item) => item.id !== dataElement.id);
-    setBoard([...newList, dataElement]);*/
+    //sacar de la lista el item que se esta moviendo
+    const indexBoard = board.findIndex((item) => item.id === dataElement.boardId);
+
+    if (indexBoard === -1) return;
+
+    const updatedBoard = [...board];
+
+    const newList = updatedBoard[indexBoard].itemsBoard.filter(
+      (item) => item.id !== dataElement.id
+    );
+
+    updatedBoard[indexBoard].itemsBoard = newList;
+
+    setBoard(updatedBoard);
+
+    //agregar el item a la lista destino
+    const indexBoardDrop = board.findIndex((item) => item.id === boardId);
+
+    if (indexBoardDrop === -1) return;
+
+    const updatedBoardDrop = [...board];
+
+    const newListDrop = updatedBoardDrop[indexBoardDrop].itemsBoard;
+
+    newListDrop.push(dataElement);
+
+    updatedBoardDrop[indexBoardDrop].itemsBoard = newListDrop;
+
+    setBoard(updatedBoardDrop);
   };
 
   return (
